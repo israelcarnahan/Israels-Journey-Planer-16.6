@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-dark-950 via-dark-900 to-dark-800 min-h-screen text-dark-100;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-gradient-to-br from-dark-800/80 via-dark-800/60 to-dark-800/80 
+           backdrop-blur-md border border-dark-700/50 rounded-lg shadow-lg
+           hover:shadow-neon-purple transition-all duration-300;
+  }
+  
+  .glass-button {
+    @apply bg-gradient-to-r from-eggplant-600 via-eggplant-500 to-eggplant-600
+           hover:from-eggplant-500 hover:via-eggplant-400 hover:to-eggplant-500
+           text-white font-medium rounded-lg shadow-lg
+           transition-all duration-300 animate-gradient-x
+           border border-eggplant-400/20
+           hover:shadow-neon-purple;
+  }
+
+  .animated-border {
+    @apply relative;
+  }
+
+  .animated-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg -z-10;
+    background: linear-gradient(
+      90deg,
+      theme(colors.neon.purple),
+      theme(colors.neon.pink),
+      theme(colors.neon.blue),
+      theme(colors.neon.purple)
+    );
+    background-size: 300% 300%;
+    animation: border-gradient 8s linear infinite;
+    padding: 2px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  .clip-path-half {
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  }
+
+  .wave-border {
+    @apply relative;
+  }
+
+  .wave-border::before {
+    content: '';
+    @apply absolute inset-0 -z-10;
+    background: linear-gradient(90deg, rgba(157, 0, 255, 0.1), rgba(157, 0, 255, 0.05));
+    mask: url("data:image/svg+xml,%3Csvg width='50' height='960' viewBox='0 0 50 960' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,480 C10,470 15,490 25,480 C35,470 40,490 50,480 C50,480 50,960 50,960 L0,960 Z' fill='%23000'/%3E%3C/svg%3E");
+    mask-size: 50px 100%;
+    mask-repeat: repeat-x;
+    animation: wave 15s linear infinite;
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-eggplant-700::-webkit-scrollbar-thumb {
+  background-color: theme('colors.eggplant.700');
+  border-radius: theme('borderRadius.full');
+}
+
+.scrollbar-track-dark-900::-webkit-scrollbar-track {
+  background-color: theme('colors.dark.900');
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Animation for dialog fade in/out */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* React DatePicker Custom Styles */
+.react-datepicker-wrapper {
+  @apply w-full;
+}
+
+.react-datepicker__input-container {
+  @apply w-full;
+}
+
+.react-datepicker__input-container input::placeholder {
+  @apply text-eggplant-400;
+}
+
+.react-datepicker {
+  @apply bg-gradient-to-r from-eggplant-900/90 via-dark-900/95 to-eggplant-900/90 border border-eggplant-700 rounded-lg shadow-lg !important;
+}
+
+.react-datepicker__header {
+  @apply bg-gradient-to-r from-eggplant-800/90 via-dark-800/95 to-eggplant-800/90 border-b border-eggplant-700 rounded-t-lg !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  @apply text-eggplant-100 !important;
+}
+
+.react-datepicker__day {
+  @apply text-eggplant-100 hover:bg-eggplant-700/50 rounded transition-colors !important;
+}
+
+.react-datepicker__day--selected {
+  @apply bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue text-white !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  @apply bg-gradient-to-r from-neon-purple/20 via-neon-pink/20 to-neon-blue/20 text-white !important;
+}
+
+.react-datepicker__day--outside-month {
+  @apply text-eggplant-500 !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  @apply border-eggplant-100 !important;
+}
+
+.react-datepicker__navigation:hover *::before {
+  @apply border-neon-blue !important;
+}
+
+.date-picker-popper {
+  @apply z-50;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes border-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100px 0%; }
+}
+
+.animate-sparkle {
+  animation: sparkle 1s ease-in-out forwards;
+}
+
+@keyframes gradient-y {
+  0%, 100% {
+    background-size: 400% 400%;
+    background-position: center top;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: center center;
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes gradient-xy {
+  0%, 100% {
+    background-size: 400% 400%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes cursor-gradient {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10px, 10px); }
+  100% { transform: translate(0, 0); }
+}
